@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use EloquentPost;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use PostRepository;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 
     /**
@@ -23,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(PostRepository::class, EloquentPost::class);
     }
 }
