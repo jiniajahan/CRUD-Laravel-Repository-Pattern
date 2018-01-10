@@ -49,6 +49,10 @@
                             <li><a href="/posts/create">Create</a></li>
                             <li><a href="{{ route('login') }}">Users</a></li>
                             <li><a href="{{ route('login') }}">Channels</a></li>
+                            <li><a href="{{ route('file.upload') }}">File Upload</a></li>
+                            @include('posts.search')
+
+
                             @endif
                     </ul>
 

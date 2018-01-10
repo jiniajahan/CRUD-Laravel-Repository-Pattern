@@ -13,4 +13,10 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function scopeSearch($query, $s){
+
+        return $query->where('title', 'like','%' .$s. '%')
+                    ->orWhere('body', 'like', '%' .$s. '%');
+    }
+
 }

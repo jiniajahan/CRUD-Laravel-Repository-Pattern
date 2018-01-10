@@ -24,7 +24,7 @@ class PostsController extends Controller
         $this->postRepository = $postRepository;
     }
 
-    public function index(){
+    public function index(Request $request){
 
         try {
 
@@ -38,6 +38,8 @@ class PostsController extends Controller
         }
 
     }
+
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

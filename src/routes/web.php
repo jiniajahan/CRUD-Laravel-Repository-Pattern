@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/posts','PostsController@index')->name('post');
+
 Route::get('/posts/create','PostsController@create')->name('post.create');
 Route::post('/posts','PostsController@store')->name('post.store');
 
@@ -40,4 +40,18 @@ Route::get('posts/{post}', [
     'as'   => 'post.show',
     'uses' => 'PostsController@show',
 ]);
+Route::get('posts', [
+    'as'   => 'post.index',
+    'uses' => 'PostsController@index',
+]);
 
+
+Route::get('upload',[
+    'as' => 'file.upload',
+    'uses' =>'UploadController@index'
+]);
+
+Route::post('upload/store',[
+    'as' => 'file.store',
+    'uses' =>'UploadController@store'
+]);

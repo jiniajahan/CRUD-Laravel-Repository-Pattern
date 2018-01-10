@@ -29,6 +29,7 @@ class EloquentPost implements PostRepository
     public function getAll()
     {
         return $this->model->paginate(5);
+
     }
 
     public function getById($id)
