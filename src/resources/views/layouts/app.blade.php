@@ -36,10 +36,20 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a href="/posts">Posts</a></li>
-                        <li><a href="/posts/create">Create</a></li>
-                        <li><a href="{{ route('login') }}">Users</a></li>
-                        <li><a href="{{ route('login') }}">Channels</a></li>
+
+                        @if(Auth::guest())
+                            <li><a href="/posts">All Posts</a></li>
+                            @else
+
+                            <li><a href="/posts">Posts</a></li>
+                            @if(Auth()->check())
+                                <li><a href="/posts?by={{Auth()->user()->name}}">My Posts</a></li>
+
+                            @endif
+                            <li><a href="/posts/create">Create</a></li>
+                            <li><a href="{{ route('login') }}">Users</a></li>
+                            <li><a href="{{ route('login') }}">Channels</a></li>
+                            @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

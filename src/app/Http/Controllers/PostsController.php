@@ -48,16 +48,78 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request,$id)
+    public function show($id){
+
+        $post = $this->postRepository->getById($id);
+
+        return view('posts.show',[ 'post' => $post]);
+
+    }
+
+    public function store(Request $request)
     {
 
         try {
 
-            $this->postRepository->store($id);
+            $this->validate(\request(),[
+                'title'=>'required|min:3',
+                'body'=>'required|min:10'
+
+            ]);
+
+            Post::create([
+                'user_id'=> auth()->id(),
+                'title' =>request('title'),
+                'body' =>request('body'),
+            ]);
 
             return redirect('/posts');
 
         } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function destroy($id){
+        try {
+
+            $this->authorize('update',$id);
+            $this->postRepository->delete($id);
+
+            return redirect('/posts');
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function edit($id)
+    {
+        try {
+            $post=$this->postRepository->edit($id);
+
+            return view('posts.edit', compact('post'));
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function update($id, Request $request,Post $post){
+        try{
+
+            $post = Post::FindorFail($id);
+
+            $this->validate(\request(),[
+                'title'=>'required|min:3',
+                'body'=>'required|min:10'
+
+            ]);
+
+            $post->update($request->all());
+            return redirect('/posts');
+
+        }catch (\Exception $e) {
             throw $e;
         }
     }

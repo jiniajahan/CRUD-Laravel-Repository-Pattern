@@ -33,7 +33,7 @@ class EloquentPost implements PostRepository
 
     public function getById($id)
     {
-        return $this->model->findById($id);
+        return $this->model->findOrFail($id);
     }
 
     public function create(array $attributes)
@@ -41,21 +41,21 @@ class EloquentPost implements PostRepository
         return $this->model->create($attributes);
     }
 
-    public function store(Request $request,$id)
-    {
-        $this->validate(\request(),[
-                'title'=>'required|min:3',
-                'body'=>'required|min:10'
-
-            ]);
-
-        Post::create([
-            'user_id'=> auth()->id(),
-            'title' =>request('title'),
-            'body' =>request('body'),
-        ]);
-        return $this->model->save(array());
-    }
+//    public function store(Request $request)
+//    {
+//        $this->validate(\request(),[
+//                'title'=>'required|min:3',
+//                'body'=>'required|min:10'
+//
+//            ]);
+//
+//        Post::create([
+//            'user_id'=> auth()->id(),
+//            'title' =>request('title'),
+//            'body' =>request('body'),
+//        ]);
+//        return $this->model->save(array());
+//    }
 
     public function update($id, array $attributes)
     {
@@ -66,7 +66,23 @@ class EloquentPost implements PostRepository
 
     public function delete($id)
     {
-        $this->getById($id)->delete;
+        $this->getById($id)->delete();
         return true;
+    }
+
+    public function edit($id)
+    {
+        return $this->getById($id);
+    }
+
+    public function getPostByUserName(User $user, $id)
+    {
+        if ($username = request('by')){
+            $user = \App\User::where('name',$username)->findOrFail();
+            $posts->where('user_id',$user->id);
+        }
+
+        $posts = $posts->get();
+        return $posts;
     }
 }

@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
                         <form method="post" action="/posts">
-                            {{csrf_field()}}
+                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Post Tile</label>
                                 <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="title">

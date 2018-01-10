@@ -22,12 +22,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts','PostsController@index')->name('post');
 Route::get('/posts/create','PostsController@create')->name('post.create');
 Route::post('/posts','PostsController@store')->name('post.store');
-Route::get('/posts/{post}','PostsController@show')->name('post.show');
-Route::get('/posts/{post}/edit','PostsController@edit')->name('post.edit');
+
+
 Route::patch('/posts/{id}','PostsController@update')->name('post.update');
 
 Route::get('post/{post}/delete', [
     'as'   => 'post.delete',
     'uses' => 'PostsController@destroy',
+]);
+
+Route::get('post/{post}/edit', [
+    'as'   => 'post.edit',
+    'uses' => 'PostsController@edit',
+]);
+
+Route::get('posts/{post}', [
+    'as'   => 'post.show',
+    'uses' => 'PostsController@show',
 ]);
 

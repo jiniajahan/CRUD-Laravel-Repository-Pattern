@@ -23,15 +23,15 @@
 </div>
 <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
 
-    <label for="title" class="control-label">
-        {{ trans('title') }}
+    <label for="Body" class="control-label">
+        {{ trans('Body') }}
     </label>
 
     <input type="text"
-           name="title"
-           id="title"
-           value="{{ old('title', @$post->body) }}"
-           placeholder="title"
+           name="body"
+           id="body"
+           value="{{ old('body', @$post->body) }}"
+           placeholder="body"
            required
            class="form-control">
 

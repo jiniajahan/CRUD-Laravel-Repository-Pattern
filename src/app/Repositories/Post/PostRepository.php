@@ -19,5 +19,8 @@ interface PostRepository
 
     public function delete($id);
 
-    public function store(Request $request,$id);
+    public function edit($id);
+
+//    public function store(Request $request);
+    public function getPostByUserName(User $user,$id);
 }
